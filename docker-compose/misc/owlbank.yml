@@ -8,7 +8,7 @@ services:
     ports:
       - "3862:3000"
     volumes:
-      - "${DUMBBUDGET_DATA_PATH}:/app/data"
+      - "owlbank-data:/app/data"
     environment:
       - DUMBBUDGET_PIN=${DUMBBUDGET_PIN}
       - BASE_URL=${DUMBBUDGET_BASE_URL}
@@ -23,3 +23,6 @@ services:
     #   interval: 20s
     #   timeout: 5s
     #   retries: 3
+volumes:
+  owlbank-data:
+    external: true
