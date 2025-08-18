@@ -1,0 +1,15 @@
+services:
+  umberwood-bot:
+    container_name: umberwood
+    image: ghcr.io/rhomelab/red-discordbot:latest
+    restart: unless-stopped
+    volumes:
+      - umberwood-data:/redbot/data
+    environment:
+      INSTANCE_NAME: "umberwood"
+      TOKEN: "${TOKEN}"
+      PREFIX: "uw:"
+      TEAM_MEMBERS_ARE_OWNERS: TRUE
+volumes:
+  umberwood-data:
+    external: true
