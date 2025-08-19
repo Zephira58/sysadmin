@@ -8,3 +8,4 @@ services:
 
 volumes:
   uptime-kuma-data:
+    external: true

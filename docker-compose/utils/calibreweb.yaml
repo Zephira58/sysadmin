@@ -13,4 +13,6 @@ services:
       - 8083:8083
 volumes:
   books:
+    external: true
   data: 
+    external: true
