@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  foundryvtt:
+    image: direckthit/fvtt-docker:latest
+    container_name: fvtt
+    ports: 
+      - 30000:30000
+    volumes:
+      - foundry-data:/data/foundryvtt
+      - foundry-host:/host
+      - foundry-app:/opt/foundryvtt/resources/app
+    restart: unless-stopped
+
+volumes:
+  foundry-data:
+    external: true
+  foundry-host:
+    external: true
+  foundry-app:
+    external: true
