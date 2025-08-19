@@ -7,12 +7,12 @@ services:
       - PGID=1000
       - TZ=Etc/UTC
     volumes:
-      - books:/books
-      - data:/config
+      - calibre-books:/books
+      - calibre-data:/config
     ports:
       - 8083:8083
 volumes:
-  books:
+  calibre-books:
     external: true
-  data: 
+  calibre-data: 
     external: true
