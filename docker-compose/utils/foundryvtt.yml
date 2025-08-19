@@ -1,21 +1,18 @@
 version: '3.8'
 
 services:
-  foundryvtt:
-    image: direckthit/fvtt-docker:latest
-    container_name: fvtt
-    ports: 
-      - 30000:30000
+  foundry:
+    image: felddy/foundryvtt:13
+    hostname: my_foundry_host
     volumes:
-      - foundry-data:/data/foundryvtt
-      - foundry-host:/host
-      - foundry-app:/opt/foundryvtt/resources/app
-    restart: unless-stopped
+      - foundry-data:/data
+    environment:
+      - FOUNDRY_PASSWORD=${FOUNDRY_PASSWORD}
+      - FOUNDRY_USERNAME=${FOUNDRY_USERNAME}
+      - FOUNDRY_ADMIN_KEY=#{FOUNDRY_ADMIN_KEY}
+    ports:
+      - "30000:30000"
 
 volumes:
   foundry-data:
-    external: true
-  foundry-host:
-    external: true
-  foundry-app:
     external: true
