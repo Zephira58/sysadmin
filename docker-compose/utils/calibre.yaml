@@ -1,7 +1,6 @@
 services:
-  calibre-web:
+  calibre:
     image: lscr.io/linuxserver/calibre-web:latest
-    container_name: calibre-web
     restart: unless-stopped
     environment:
       - PUID=1000
