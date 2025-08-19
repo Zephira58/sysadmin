@@ -9,7 +9,6 @@ services:
     environment:
       - FOUNDRY_PASSWORD=${FOUNDRY_PASSWORD}
       - FOUNDRY_USERNAME=${FOUNDRY_USERNAME}
-      - FOUNDRY_ADMIN_KEY=#{FOUNDRY_ADMIN_KEY}
     ports:
       - "30000:30000"
 
