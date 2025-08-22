@@ -15,7 +15,7 @@ This document provides basic troubleshooting steps for all services in the sysad
 - **Unable to access web interface:**
   - Check port mapping `30000:30000`.
   - Verify server firewall allows access.
-  - Check cloudflare routing
+  - Check Cloudflare routing.
 - **Data missing or corrupted:**
   - Restore from backup volume `foundry-data`.
 
@@ -82,3 +82,27 @@ This document provides basic troubleshooting steps for all services in the sysad
 - **Data issues:**
   - Restore `owlbank-data` volume.
   - Re-apply environment variables (`DUMBBUDGET_PIN`, `DUMBBUDGET_BASE_URL`, etc.).
+
+---
+
+## 7. Zephira.uk (Portfolio Website)
+**Description:** Static personal portfolio hosted at [https://zephira.uk](https://zephira.uk).
+
+**Common Issues & Fixes:**
+- **Website not loading:**
+  - Verify container logs: `docker logs zephislibrary`.
+  - Check Nginx/Traefik reverse proxy configuration.
+  - Confirm DNS records at Cloudflare point to the correct server.
+- **SSL issues:**
+  - Run certificate renewal (`certbot renew` or Traefik auto-renew).
+  - Ensure Cloudflare SSL mode is set to **Full (Strict)**.
+- **Content outdated:**
+  - Pull latest repo changes:
+    ```bash
+    cd /services/zephislibrary
+    git pull origin main
+    docker-compose up -d --build
+    ```
+- **Performance problems:**
+  - Check server load in Beszel.
+  - Verify CDN caching via Cloudflare is enabled.

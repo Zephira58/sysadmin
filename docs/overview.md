@@ -1,15 +1,25 @@
 # Infrastructure Overview
 
-This repository documents my personal sysadmin stack, managed primarily through Dockploy.
+This repository documents my personal sysadmin stack, managed primarily through Dockploy.  
 Backups are pushed to a Hetzner S3 (Frankfurt) storage box.  
 Instances are split across **3 primary servers**:
-- **Admin Panel (Hetzner VPS, US):** Beszel, Uptime Kuma, OwlBank
+- **Admin Panel (Hetzner VPS, US):** Beszel, Uptime Kuma, OwlBank, Zephira.uk Portfolio
 - **Oracle Free Tier (US):** UmberWood, FoundryVTT
 - **Oracle Free Tier (AU):** Calibre
 
 ---
 
 ## Services
+
+### 🌐 Zephira.uk Portfolio
+- **Description:** Personal portfolio static site.  
+- **Repository:** [services/zephislibrary](https://github.com/Zephira58/sysadmin/tree/main/services/zephislibrary)  
+- **Deployment:** Static HTML/CSS/JS (served via Dockploy & Nginx)  
+- **Domain:** [https://zephira.uk](https://zephira.uk/)  
+- **Server:** Hetzner Admin Panel (US)  
+- **Notes:** No backend required, purely static site. Reverse-proxied through Traefik.
+
+---
 
 ### 🎲 FoundryVTT
 - **Description:** A self-hosted virtual tabletop for Dungeons & Dragons campaigns.
@@ -87,3 +97,4 @@ Instances are split across **3 primary servers**:
   - `DUMBBUDGET_SITE_TITLE`
   - `DUMBBUDGET_INSTANCE_NAME`
 - **Server:** Hetzner Admin Panel (US)
+

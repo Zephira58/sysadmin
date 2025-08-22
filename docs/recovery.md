@@ -1,99 +1,112 @@
 # Disaster Recovery Guide
 
-This document explains how to restore services after a server wipe.  
+This document explains how to restore services after a server wipe.
 Backups are stored in Hetzner S3 (Frankfurt).
+Service definitions and deployment configs are stored in this GitHub repo.
 
 ---
 
 ## 1. Provision Servers
-- Oracle Free Tier (US) → FoundryVTT, UmberWood
-- Oracle Free Tier (AU) → Calibre
-- Hetzner VPS (US) → Admin Panel (Beszel, Uptime Kuma, OwlBank)
+
+* Oracle Free Tier (US) → FoundryVTT, UmberWood
+* Oracle Free Tier (AU) → Calibre
+* Hetzner VPS (US) → Admin Panel (Beszel, Uptime Kuma, OwlBank, Portfolio)
 
 Install required software:
+
 ```bash
-apt update && apt install -y docker docker-compose
+apt update && apt install -y docker docker-compose git
 ```
 
 ---
 
-## 2. Restore Volumes and ENV's
-Each service uses **external Docker volumes**. Restore them from S3 backups:
+## 2. Clone Repository
 
-- `foundry-data`
-- `umberwood-data`
-- `calibre-books`
-- `calibre-data`
-- `uptime-kuma-data`
-- `beszel_data`
-- `owlbank-data`
+Clone the sysadmin repo onto the new server:
 
-Env files for each service can be located in the /env folder, only in the local copy of this repo. Its excluded from the github listing for security
+```bash
+git clone https://github.com/Zephira58/sysadmin.git /opt/sysadmin
+cd /opt/sysadmin/services
+```
+
+All deployment files are contained within the repo under `/services/<service-name>`.
 
 ---
 
-## 3. Redeploy Services
+## 3. Restore Volumes and ENV's
 
-### 3a. Manual Deployment
-1. Navigate to the deployment folder of the desired service:
+Each service uses **external Docker volumes**. Restore them from S3 backups if data is required:
+
+* `foundry-data`
+* `umberwood-data`
+* `calibre-books`
+* `calibre-data`
+* `uptime-kuma-data`
+* `beszel_data`
+* `owlbank-data`
+
+Environment files are stored in `/opt/sysadmin/env/` after repo clone.
+**Note:** The `/env` folder is excluded from GitHub for security — restore it from your secure local backup.
+
+---
+
+## 4. Redeploy Services
+
+### 4a. Manual Deployment
+
+1. Navigate to the service folder:
+
 ```bash
-cd /path/to/deployment
+cd /opt/sysadmin/services/<service-name>
 ```
-2. Start the stack with Docker Compose:
+
+2. Start with Docker Compose:
+
 ```bash
 docker-compose up -d
 ```
-3. Verify volumes and environment variables are correctly mapped.
 
-### 3b. Dockploy Deployment
-Dockploy is a self-hosted deployment platform that simplifies multi-server management.
+3. Verify logs:
 
-#### 3b.1 Initial Setup
-1. Install Dockploy on your primary server:
 ```bash
-curl -sSL https://dokploy.com/install.sh | sh
+docker logs -f <container>
 ```
-2. Access the Dockploy web interface at `http://<server-ip>:3000`.
-3. Create an admin account for managing deployments.
 
-#### 3b.2 Adding Remote Servers
-1. Generate an SSH key pair in the Dockploy dashboard under **Settings > SSH Keys**.
-2. Copy the public key to each remote server's `~/.ssh/authorized_keys`.
-3. Add the server in Dockploy (**Settings > Servers**) with:
-   - Name (descriptive)
-   - IP Address
-   - SSH Port (default 22)
-   - Username
-   - Select the SSH key generated
-4. Test the connection via Dockploy's terminal feature.
+### 4b. Dockploy Deployment
 
-#### 3b.3 Deploy Applications
-1. Create a deployment in Dockploy (**Project Name > Create Service**).
-2. Choose target servers.
-3. Select the repository or Docker Compose file.
-4. Click **Deploy**.
-
-#### 3b.4 Managing Multiple Servers
-- View all servers and their statuses in **Servers**.
-- Edit server details as needed.
-- Remove servers via the **Remove Server** option.
+Dockploy can redeploy all services directly from the GitHub repo.
 
 ---
 
-## 4. Service Notes
-- **FoundryVTT:** Requires `FOUNDRY_USERNAME`, `FOUNDRY_PASSWORD`, `FOUNDRY_ADMIN_KEY`. Restore `foundry-data`.
-- **Beszel:** Restore `beszel_data` volume.
-- **Calibre:** Restore `calibre-books` and `calibre-data`.
-- **Uptime Kuma:** Restore `uptime-kuma-data`.
-- **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
-- **OwlBank:** Restore `owlbank-data` and environment variables.
+## 5. Service Notes
+
+* **FoundryVTT:** Requires `FOUNDRY_USERNAME`, `FOUNDRY_PASSWORD`, `FOUNDRY_ADMIN_KEY`. Restore `foundry-data`.
+* **Beszel:** Restore `beszel_data` volume.
+* **Calibre:** Restore `calibre-books` and `calibre-data`.
+* **Uptime Kuma:** Restore `uptime-kuma-data`.
+* **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
+* **OwlBank:** Restore `owlbank-data` and re-apply environment variables.
+* **Zephira.uk (Portfolio Website):**
+
+  * Deployment files are under `/services/zephislibrary`.
+  * To redeploy latest version:
+
+    ```bash
+    git fetch https://github.com/Zephira58/sysadmin.git
+    cd /sysadmin/stacks
+    docker-compose up -d --build
+    ```
+  * Ensure Traefik/Cloudflare are correctly routing traffic.
+  * SSL handled by Traefik or Cloudflare.
 
 ---
 
-## 5. Verification
-- Uptime Kuma shows all services green.
-- FoundryVTT loads saved campaigns.
-- UmberWood bot responds in Discord.
-- Calibre web interface shows library.
-- OwlBank dashboard is reachable.
-- Beszel metrics streaming from all nodes.
+## 6. Verification
+
+* Uptime Kuma shows all services green.
+* FoundryVTT loads saved campaigns.
+* UmberWood bot responds in Discord.
+* Calibre web interface shows library.
+* OwlBank dashboard is reachable.
+* Beszel metrics streaming from all nodes.
+* Zephira.uk loads correctly with valid SSL and updated content.
