@@ -19,8 +19,6 @@ This document explains how monitoring is set up for the sysadmin stack, includin
 - **OwlBank** → OwlBank admin panel
 
 **Frequency:**
-
-- Checks every 60 seconds.
 - SSL certificate expiry is monitored (notifications before expiration).
 
 **Example metrics:**
