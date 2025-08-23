@@ -22,7 +22,7 @@ This document explains how monitoring and alerting is configured for the sysadmi
 * **Calibre** → Calibre AU Oracle server
 * **OwlBank** → OwlBank admin panel (HetznerVPS)
 * **Personal Website** → [https://zephira.uk](https://zephira.uk) (HetznerVPS / Dokploy server)
-* **Karakeep** → AU Oracle server
+* **Karakeep** → US Oracle server
 
 **Frequency:**
 

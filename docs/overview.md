@@ -5,8 +5,8 @@ Backups are pushed to a Hetzner S3 (Frankfurt) storage box.
 Instances are split across **3 primary servers**:
 
 * **Admin Panel (Hetzner VPS, US):** Beszel, Uptime Kuma, OwlBank, Zephira.uk Portfolio
-* **Oracle Free Tier (US):** UmberWood, FoundryVTT
-* **Oracle Free Tier (AU):** Calibre, Karakeep
+* **Oracle Free Tier (US):** UmberWood, FoundryVTT, Karakeep
+* **Oracle Free Tier (AU):** Calibre
 
 ---
 
@@ -76,7 +76,7 @@ Instances are split across **3 primary servers**:
 * **Image:** Github container registry
 * **Ports:** 3000
 * **Volumes:** Persistent data volume (`karakeep-data`, 'meilisearch-data')
-* **Server:** Oracle Free Tier (AU)
+* **Server:** Oracle Free Tier (US)
 * **Notes:** Monitored by Uptime Kuma and Beszel for uptime and resource usage.
 
 ---

@@ -8,8 +8,8 @@ Service definitions and deployment configs are stored in this GitHub repo.
 
 ## 1. Provision Servers
 
-* Oracle Free Tier (US) → FoundryVTT, UmberWood
-* Oracle Free Tier (AU) → Calibre, Karakeep
+* Oracle Free Tier (US) → FoundryVTT, UmberWood, Karakeep
+* Oracle Free Tier (AU) → Calibre
 * Hetzner VPS (US) → Admin Panel (Beszel, Uptime Kuma, OwlBank, Portfolio)
 
 Install required software:
