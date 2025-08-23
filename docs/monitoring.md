@@ -23,6 +23,7 @@ This document explains how monitoring and alerting is configured for the sysadmi
 * **OwlBank** → OwlBank admin panel (HetznerVPS)
 * **Personal Website** → [https://zephira.uk](https://zephira.uk) (HetznerVPS / Dokploy server)
 * **Karakeep** → US Oracle server
+* **Cloud Nextcloud** → [https://cloud.zephira.uk](https://cloud.zephira.uk) (Dedicated Hetzner Nexcloud Robot KonsoleH storage share)
 
 **Frequency:**
 
@@ -52,6 +53,7 @@ This document explains how monitoring and alerting is configured for the sysadmi
 * **HetznerVPS (Admin Panel / Dokploy)** → Beszel, Uptime Kuma, OwlBank, Personal Website
 * **OracleVPS (US)** → FoundryVTT, UmberWood
 * **OracleVPS (AU)** → Calibre, Karakeep
+* **Dedicated Hetzner Nexcloud Robot Share** → Cloud Nextcloud
 * **Local PC (zephipc)** → monitored but **no alerts** configured
 
 **Metrics Collected:**
