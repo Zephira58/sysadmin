@@ -1,112 +1,99 @@
-# Disaster Recovery Guide
+# Monitoring & Alerts
 
-This document explains how to restore services after a server wipe.
-Backups are stored in Hetzner S3 (Frankfurt).
-Service definitions and deployment configs are stored in this GitHub repo.
+This document explains how monitoring and alerting is configured for the sysadmin stack, covering **Uptime Kuma** for service uptime and SSL monitoring, and **Beszel** for host system metrics.
 
 ---
 
-## 1. Provision Servers
+## 1. Alerting
 
-* Oracle Free Tier (US) → FoundryVTT, UmberWood
-* Oracle Free Tier (AU) → Calibre
-* Hetzner VPS (US) → Admin Panel (Beszel, Uptime Kuma, OwlBank, Portfolio)
-
-Install required software:
-
-```bash
-apt update && apt install -y docker docker-compose git
-```
+* All alerts are delivered to a **private Discord server** via webhook.
+* No email or SMS alerts are configured.
+* Alerts should be checked daily for false positives and outages.
 
 ---
 
-## 2. Clone Repository
+## 2. Uptime Kuma
 
-Clone the sysadmin repo onto the new server:
+**Dashboard URL:** [https://status.zephira.uk/dashboard](https://status.zephira.uk/dashboard)
 
-```bash
-git clone https://github.com/Zephira58/sysadmin.git /opt/sysadmin
-cd /opt/sysadmin/services
-```
+**Monitored Services:**
 
-All deployment files are contained within the repo under `/services/<service-name>`.
+* **FoundryVTT** → [https://foundryvtt.zephira.uk/](https://foundryvtt.zephira.uk/) (OracleVPS US)
+* **Calibre** → Calibre AU Oracle server
+* **OwlBank** → OwlBank admin panel (HetznerVPS)
+* **Personal Website** → [https://zephira.uk](https://zephira.uk) (HetznerVPS / Dokploy server)
+* **Karakeep** → AU Oracle server
 
----
+**Frequency:**
 
-## 3. Restore Volumes and ENV's
+* Monitors run every **60 seconds**.
+* SSL certificate expiry is tracked with advance warnings before expiration.
 
-Each service uses **external Docker volumes**. Restore them from S3 backups if data is required:
+**Example Metrics:**
 
-* `foundry-data`
-* `umberwood-data`
-* `calibre-books`
-* `calibre-data`
-* `uptime-kuma-data`
-* `beszel_data`
-* `owlbank-data`
+* Response time (ms)
+* Uptime % (24h, 30d)
+* SSL Expiry countdown
 
-Environment files are stored in `/opt/sysadmin/env/` after repo clone.
-**Note:** The `/env` folder is excluded from GitHub for security — restore it from your secure local backup.
+**Recovery Steps:**
 
----
-
-## 4. Redeploy Services
-
-### 4a. Manual Deployment
-
-1. Navigate to the service folder:
-
-```bash
-cd /opt/sysadmin/services/<service-name>
-```
-
-2. Start with Docker Compose:
-
-```bash
-docker-compose up -d
-```
-
-3. Verify logs:
-
-```bash
-docker logs -f <container>
-```
-
-### 4b. Dockploy Deployment
-
-Dockploy can redeploy all services directly from the GitHub repo.
+1. If a monitor is DOWN, verify with `docker ps` on the relevant server.
+2. Check logs with `docker logs <container>`.
+3. If SSL certificate is expired, renew via **Traefik / Let’s Encrypt**.
 
 ---
 
-## 5. Service Notes
+## 3. Beszel
 
-* **FoundryVTT:** Requires `FOUNDRY_USERNAME`, `FOUNDRY_PASSWORD`, `FOUNDRY_ADMIN_KEY`. Restore `foundry-data`.
-* **Beszel:** Restore `beszel_data` volume.
-* **Calibre:** Restore `calibre-books` and `calibre-data`.
-* **Uptime Kuma:** Restore `uptime-kuma-data`.
-* **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
-* **OwlBank:** Restore `owlbank-data` and re-apply environment variables.
-* **Zephira.uk (Portfolio Website):**
+**Dashboard URL:** [https://monitor.zephira.uk/](https://monitor.zephira.uk/)
 
-  * Deployment files are under `/services/zephislibrary`.
-  * To redeploy latest version:
+**Monitored Hosts:**
 
-    ```bash
-    cd /opt/sysadmin/services/zephislibrary
-    git pull origin main
-    docker-compose up -d --build
-    ```
-  * Ensure Traefik/Cloudflare are correctly routing traffic.
-  * SSL handled by Traefik or Cloudflare.
+* **HetznerVPS (Admin Panel / Dokploy)** → Beszel, Uptime Kuma, OwlBank, Personal Website
+* **OracleVPS (US)** → FoundryVTT, UmberWood
+* **OracleVPS (AU)** → Calibre, Karakeep
+* **Local PC (zephipc)** → monitored but **no alerts** configured
+
+**Metrics Collected:**
+
+* CPU %
+* Memory usage %
+* Disk usage %
+* GPU usage % (if available)
+* Load average
+* Network I/O
+* Temperature
+
+**Alerts:**
+
+* Enabled on all servers except **local PC (zephipc)**.
+* Typical triggers:
+
+  * High memory usage
+  * High disk usage
+  * High CPU/load average
 
 ---
 
-## 6. Verification
+## 4. What To Do When Alerts Fire
 
-* Uptime Kuma shows all services green.
-* FoundryVTT loads saved campaigns.
-* UmberWood bot responds in Discord.
-* Calibre web interface shows library.
-* OwlBank dashboard is reachable.
-* Beszel metrics streaming from all nodes.
-* Zephira.uk loads correctly with valid SSL and updated content.
+1. **Check Beszel** → look for system resource strain.
+
+   * High CPU → check if a Docker container is looping.
+   * High memory → restart service or scale resources.
+   * High disk → clean logs, prune Docker volumes, or expand storage.
+
+2. **Check Uptime Kuma** → confirm if the service is actually down.
+
+3. If outage is confirmed:
+
+   * Follow recovery steps in `recovery.md`.
+   * If persistent, escalate to backup restore process.
+
+---
+
+## 5. Status Pages
+
+* **Uptime Kuma** supports a public-facing status page.
+* Currently, only the internal dashboard is in use.
+* Public exposure can be enabled later if needed.

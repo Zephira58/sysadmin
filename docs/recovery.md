@@ -1,7 +1,7 @@
 # Disaster Recovery Guide
 
 This document explains how to restore services after a server wipe.
-Backups are stored in Hetzner S3 (Frankfurt).
+Backups are stored in **Hetzner S3 (Frankfurt)**.
 Service definitions and deployment configs are stored in this GitHub repo.
 
 ---
@@ -9,7 +9,7 @@ Service definitions and deployment configs are stored in this GitHub repo.
 ## 1. Provision Servers
 
 * Oracle Free Tier (US) → FoundryVTT, UmberWood
-* Oracle Free Tier (AU) → Calibre
+* Oracle Free Tier (AU) → Calibre, Karakeep
 * Hetzner VPS (US) → Admin Panel (Beszel, Uptime Kuma, OwlBank, Portfolio)
 
 Install required software:
@@ -44,6 +44,8 @@ Each service uses **external Docker volumes**. Restore them from S3 backups if d
 * `uptime-kuma-data`
 * `beszel_data`
 * `owlbank-data`
+* `karakeep-data`
+* `meilisearch-data`
 
 Environment files are stored in `/opt/sysadmin/env/` after repo clone.
 **Note:** The `/env` folder is excluded from GitHub for security — restore it from your secure local backup.
@@ -86,6 +88,7 @@ Dockploy can redeploy all services directly from the GitHub repo.
 * **Uptime Kuma:** Restore `uptime-kuma-data`.
 * **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
 * **OwlBank:** Restore `owlbank-data` and re-apply environment variables.
+* **Karakeep:** Restore `karakeep-data` and `meilisearch-data`. Ensure environment variables are re-applied for authentication and search index.
 * **Zephira.uk (Portfolio Website):**
 
   * Deployment files are under `/services/zephislibrary`.
@@ -108,5 +111,6 @@ Dockploy can redeploy all services directly from the GitHub repo.
 * UmberWood bot responds in Discord.
 * Calibre web interface shows library.
 * OwlBank dashboard is reachable.
+* Karakeep UI loads and search is functional (Meilisearch running).
 * Beszel metrics streaming from all nodes.
 * Zephira.uk loads correctly with valid SSL and updated content.
