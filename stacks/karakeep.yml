@@ -10,8 +10,8 @@ services:
       BROWSER_WEB_URL: http://chrome:9222
       DATA_DIR: /data
       NEXTAUTH_SECRET: your_secure_key
-      ports: 
-        - "3000:3000"
+    ports: 
+      - "3000:3000"
   chrome:
     image: gcr.io/zenika-hub/alpine-chrome:124
     restart: unless-stopped
