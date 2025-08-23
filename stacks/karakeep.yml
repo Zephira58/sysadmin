@@ -10,6 +10,7 @@ services:
       BROWSER_WEB_URL: http://chrome:9222
       DATA_DIR: /data
       NEXTAUTH_SECRET: your_secure_key
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
     ports: 
       - "3000:3000"
   chrome:
