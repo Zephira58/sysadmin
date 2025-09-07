@@ -24,6 +24,7 @@ This document explains how monitoring and alerting is configured for the sysadmi
 * **Personal Website** → [https://zephira.uk](https://zephira.uk) (HetznerVPS / Dokploy server)
 * **Karakeep** → US Oracle server
 * **Cloud Nextcloud** → [https://cloud.zephira.uk](https://cloud.zephira.uk) (Dedicated Hetzner Nexcloud Robot KonsoleH storage share)
+* **Akaunting** → [https://accounting.zephira.uk](https://accounting.zephira.uk) (HetznerVPS / Dokploy server)
 
 **Frequency:**
 

@@ -122,3 +122,28 @@ Instances are split across **3 primary servers**:
   * `DUMBBUDGET_SITE_TITLE`
   * `DUMBBUDGET_INSTANCE_NAME`
 * **Server:** Hetzner Admin Panel (US)
+
+### 💳 Akaunting
+
+* **Description:** A simple accounting software i use for my streaming/freelance stuff
+* **Image:** `docker.io/akaunting`
+* **Ports:** `80:80` and `3306:3306`
+* **Volumes:** `akaunting-data` and `akaunting-db`
+* **Environment:**
+  * `APP_URL`
+  * `LOCALE`
+  * `DB_HOST`
+  * `DB_PORT`
+  * `DB_NAME`
+  * `DB_USERNAME`
+  * `DB_PASSWORD`
+  * `DB_PREFIX`
+  * `COMPANY_NAME`
+  * `COMPANY_EMAIL`
+  * `ADMIN_EMAIL`
+  * `ADMIN_PASSWORD`
+  * `MYSQL_DATABASE`
+  * `MYSQL_USER`
+  * `MYSQL_PASSWORD`
+  * `MYSQL_RANDOM_ROOT_PASSWORD`
+* **Server:** Hetzner Admin Panel (US)
