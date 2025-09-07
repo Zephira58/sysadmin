@@ -128,7 +128,7 @@ Instances are split across **3 primary servers**:
 * **Description:** A simple accounting software i use for my streaming/freelance stuff
 * **Image:** `docker.io/ezbookkeeping`
 * **Ports:** `80:80` and `3306:3306`
-* **Volumes:** `ezbookkeeping-data` and `ezbookkeeping-db`
+* **Volumes:** `mysql-data`, `storage`, and `logs`.
     * **Environment:**
       * `MYSQL_ROOT_PASSWORD`
       * `MYSQL_DATABASE`

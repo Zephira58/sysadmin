@@ -91,7 +91,7 @@ Dockploy can redeploy all services directly from the GitHub repo.
 * **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
 * **OwlBank:** Restore `owlbank-data` and re-apply environment variables.
 * **Karakeep:** Restore `karakeep-data` and `meilisearch-data`. Ensure environment variables are re-applied for authentication and search index.
-* **ezbookkeeping:** Restore `ezbookkeeping-data` and `ezbookkeeping-db` Ensure environment variables are re-applied
+* **ezbookkeeping:** Restore `mysql-data`, `storage`, and `logs`. Ensure environment variables are re-applied.
 * **Zephira.uk (Portfolio Website):**
 
   * Deployment files are under `/services/zephislibrary`.
