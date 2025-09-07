@@ -46,8 +46,8 @@ Each service uses **external Docker volumes**. Restore them from S3 backups if d
 * `owlbank-data`
 * `karakeep-data`
 * `meilisearch-data`
-* `akaunting-data`
-* `akaunting-db`
+* `ezbookkeeping-data`
+* `ezbookkeeping-db`
 
 Environment files are stored in `/opt/sysadmin/env/` after repo clone.
 **Note:** The `/env` folder is excluded from GitHub for security — restore it from your secure local backup.
@@ -91,7 +91,7 @@ Dockploy can redeploy all services directly from the GitHub repo.
 * **UmberWood:** Restore `umberwood-data` and re-inject `TOKEN`.
 * **OwlBank:** Restore `owlbank-data` and re-apply environment variables.
 * **Karakeep:** Restore `karakeep-data` and `meilisearch-data`. Ensure environment variables are re-applied for authentication and search index.
-* **Akaunting:** Restore `akaunting-data` and `akaunting-db` Ensure environment variables are re-applied
+* **ezbookkeeping:** Restore `ezbookkeeping-data` and `ezbookkeeping-db` Ensure environment variables are re-applied
 * **Zephira.uk (Portfolio Website):**
 
   * Deployment files are under `/services/zephislibrary`.

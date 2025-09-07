@@ -123,27 +123,24 @@ Instances are split across **3 primary servers**:
   * `DUMBBUDGET_INSTANCE_NAME`
 * **Server:** Hetzner Admin Panel (US)
 
-### 💳 Akaunting
+### 💳 ezbookkeeping
 
 * **Description:** A simple accounting software i use for my streaming/freelance stuff
-* **Image:** `docker.io/akaunting`
+* **Image:** `docker.io/ezbookkeeping`
 * **Ports:** `80:80` and `3306:3306`
-* **Volumes:** `akaunting-data` and `akaunting-db`
-* **Environment:**
-  * `APP_URL`
-  * `LOCALE`
-  * `DB_HOST`
-  * `DB_PORT`
-  * `DB_NAME`
-  * `DB_USERNAME`
-  * `DB_PASSWORD`
-  * `DB_PREFIX`
-  * `COMPANY_NAME`
-  * `COMPANY_EMAIL`
-  * `ADMIN_EMAIL`
-  * `ADMIN_PASSWORD`
-  * `MYSQL_DATABASE`
-  * `MYSQL_USER`
-  * `MYSQL_PASSWORD`
-  * `MYSQL_RANDOM_ROOT_PASSWORD`
+* **Volumes:** `ezbookkeeping-data` and `ezbookkeeping-db`
+    * **Environment:**
+      * `MYSQL_ROOT_PASSWORD`
+      * `MYSQL_DATABASE`
+      * `MYSQL_USER`
+      * `MYSQL_PASSWORD`
+      * `EBK_SERVER_DOMAIN`
+      * `EBK_SERVER_ENABLE_GZIP`
+      * `EBK_DATABASE_TYPE`
+      * `EBK_DATABASE_HOST`
+      * `EBK_DATABASE_NAME`
+      * `EBK_DATABASE_USER`
+      * `EBK_DATABASE_PASSWD`
+      * `EBK_LOG_MODE`
+      * `EBK_SECURITY_SECRET_KEY`
 * **Server:** Hetzner Admin Panel (US)

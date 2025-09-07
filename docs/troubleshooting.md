@@ -165,49 +165,42 @@ This document provides basic troubleshooting steps for all services in the sysad
   * Check reverse proxy (Traefik/Nginx) configuration.
   * Confirm AU Oracle server is reachable externally.
 
-## 9. Akaunting
+## 9. EZBookkeeping
 
-**Description:** Self-hosted personal finance manager deployed via Docker.
+**Description:** Lightweight self-hosted bookkeeping app deployed via Docker.
 
 **Common Issues & Fixes:**
 
 * **Service not starting:**
-  * Check `docker logs akaunting` for errors.
-  * Verify database container (`akaunting-db`) is running and accessible.
-  * Ensure environment variables are correctly set:
+  * Check `docker logs ezbookkeeping` for errors.
+  * Ensure MySQL container is running and accessible.
+  * Verify environment variables are correctly set:
 
     * **Environment:**
-      * `APP_URL`
-      * `LOCALE`
-      * `DB_HOST`
-      * `DB_PORT`
-      * `DB_NAME`
-      * `DB_USERNAME`
-      * `DB_PASSWORD`
-      * `DB_PREFIX`
-      * `COMPANY_NAME`
-      * `COMPANY_EMAIL`
-      * `ADMIN_EMAIL`
-      * `ADMIN_PASSWORD`
+      * `MYSQL_ROOT_PASSWORD`
       * `MYSQL_DATABASE`
       * `MYSQL_USER`
       * `MYSQL_PASSWORD`
-      * `MYSQL_RANDOM_ROOT_PASSWORD`
+      * `EBK_SERVER_DOMAIN`
+      * `EBK_SERVER_ENABLE_GZIP`
+      * `EBK_DATABASE_TYPE`
+      * `EBK_DATABASE_HOST`
+      * `EBK_DATABASE_NAME`
+      * `EBK_DATABASE_USER`
+      * `EBK_DATABASE_PASSWD`
+      * `EBK_LOG_MODE`
+      * `EBK_SECURITY_SECRET_KEY`
 
 * **Web interface unreachable:**
   * Confirm port mapping in `docker-compose.yml`.
-  * Check reverse proxy configuration (Traefik/Nginx).
+  * Check reverse proxy configuration.
   * Verify DNS records point to the correct server.
 
 * **Database connection errors:**
-  * Ensure `DB_HOST` matches the database container name.
-  * Confirm credentials (`DB_USERNAME`, `DB_PASSWORD`) match MySQL setup.
-  * Check that `MYSQL_DATABASE` and `DB_NAME` are consistent.
-
-* **Login issues or admin access failure:**
-  * Recheck `ADMIN_EMAIL` and `ADMIN_PASSWORD` in `.env`.
-  * Inspect logs for authentication errors.
+  * Ensure `EBK_DATABASE_HOST` matches the MySQL container name and port.
+  * Confirm credentials (`EBK_DATABASE_USER`, `EBK_DATABASE_PASSWD`) match MySQL setup.
+  * Check consistency between `MYSQL_DATABASE` and `EBK_DATABASE_NAME`.
 
 * **Data loss or corruption:**
-  * Restore `akaunting-db` volume from backup.
-  * Verify integrity of `.env` and database dump files.
+  * Restore MySQL volume from backup.
+  * Verify `.env` file integrity and database dumps.
