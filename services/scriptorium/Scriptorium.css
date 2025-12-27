@@ -46,7 +46,7 @@ body {
 
     /* dms button options */
     --custom-dms-icon: custom;
-    --dms-icon-svg-url: url('https://raw.githubusercontent.com/Zephira58/sysadmin/fd551ce946d1626ae8a5d265180492e2e7fc352b/services/scriptorium/scriptorium.svg');
+    --dms-icon-svg-url: url('https://raw.githubusercontent.com/Zephira58/sysadmin/fd551ce946d1626ae8a5d265180492e2e7fc352b/services/scriptorium/assets/scriptorium.svg');
     --dms-icon-svg-size: 90%;
     --dms-icon-color-before: var(--text-4);
     --dms-icon-color-after: var(--text-1);
