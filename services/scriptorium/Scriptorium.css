@@ -1,0 +1,194 @@
+/**
+ * @name Scriptorium
+ * @description A rounded Discord theme with a dark academia oak wood and aged parchment aesthetic. Taking inspiration from my website and design aesthetic.
+ * @author Zephira58
+ * @version 1.1.0
+ * @invite HYwf562XQA
+ * @website https://zephira.uk/
+ * @source https://github.com/Zephira58/sysadmin/blob/main/services/scriptorium/scriptorium.css
+ * @authorId 292971545956188160
+ * @authorLink https://zephira.uk/
+ * @license MIT
+ */
+
+/* import theme modules */
+@import url('https://github.com/Zephira58/sysadmin/blob/main/services/scriptorium/scriptoriumlib.css');
+
+/* import font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+body {
+    /* font */
+    --font: 'Cormorant Garamond', serif;
+    --code-font: 'Cormorant Garamond', serif;
+    font-weight: 500;
+
+    /* sizes */
+    --gap: 12px;
+    --divider-thickness: 4px;
+    --border-thickness: 1px;
+
+    /* animation/transition options */
+    --animations: on;
+    --list-item-transition: 0.2s ease;
+    --dms-icon-svg-transition: 0.4s ease;
+    --border-hover-transition: 0.2s ease;
+
+    /* top bar options */
+    --top-bar-height: var(--gap);
+    --top-bar-button-position: titlebar;
+    --top-bar-title-position: off;
+    --subtle-top-bar-title: off;
+
+    /* window controls */
+    --custom-window-controls: on;
+    --window-control-size: 14px;
+
+    /* dms button options */
+    --custom-dms-icon: custom;
+    --dms-icon-svg-url: url('https://raw.githubusercontent.com/Zephira58/sysadmin/blob/main/services/scriptorium/scriptorium.svg');
+    --dms-icon-svg-size: 90%;
+    --dms-icon-color-before: var(--text-4);
+    --dms-icon-color-after: var(--text-1);
+
+    --custom-dms-background: color;
+    --dms-background-image-url: url('');
+    --dms-background-image-size: cover;
+    --dms-background-color: linear-gradient(
+        70deg,
+        #3c2c29,
+        #5d3e39
+    );
+
+    /* background image options */
+    --background-image: off;
+    --background-image-url: url('');
+
+    /* transparency/blur options */
+    --transparency-tweaks: off;
+    --remove-bg-layer: off;
+    --panel-blur: off;
+    --blur-amount: 12px;
+    --bg-floating: var(--bg-3);
+
+    /* chatbar options */
+    --custom-chatbar: aligned;
+    --chatbar-height: 47px;
+    --chatbar-padding: 8px;
+
+    /* other options */
+    --small-user-panel: on;
+}
+
+/* color options */
+:root {
+    --colors: on;
+
+    /* TEXT COLORS (Parchment) */
+    --text-0: var(--bg-4);
+    --text-1: #f3ede6;
+    --text-2: #e6dccf;
+    --text-3: #d1c4b3;
+    --text-4: #b5a89a;
+    --text-5: #8a7d72;
+
+    /* BACKGROUND COLORS (Dark Oak / Academia) */
+    --bg-1: #5d3e39;
+    --bg-2: #4a3430;
+    --bg-3: #3c2c29;
+    --bg-4: #2a1f1d;
+
+    --hover: rgba(219, 186, 158, 0.08);
+    --active: rgba(219, 186, 158, 0.16);
+    --active-2: rgba(219, 186, 158, 0.24);
+    --message-hover: rgba(219, 186, 158, 0.05);
+
+    /* ACCENT COLORS (Aged Gold / Parchment Ink) */
+    --accent-1: #dbba9e;
+    --accent-2: #dbba9e;
+    --accent-3: #c9a889;
+    --accent-4: #e6cbb3;
+    --accent-5: #b89472;
+
+    --accent-new: #8f5a4a;
+
+    --mention: linear-gradient(
+        to right,
+        rgba(219, 186, 158, 0.25) 40%,
+        transparent
+    );
+
+    --mention-hover: linear-gradient(
+        to right,
+        rgba(219, 186, 158, 0.35) 40%,
+        transparent
+    );
+
+    --reply: linear-gradient(
+        to right,
+        rgba(209, 196, 179, 0.25) 40%,
+        transparent
+    );
+
+    --reply-hover: linear-gradient(
+        to right,
+        rgba(209, 196, 179, 0.35) 40%,
+        transparent
+    );
+
+    /* STATUS + SUCCESS COLORS (Remapped from green to antique brass) */
+    --green-1: #c89a7c;
+    --green-2: #aa806b;
+    --green-3: #9a725f;
+    --green-4: #8a6453;
+    --green-5: #7a5647;
+
+    --online: #aa806b;
+    --success: #aa806b;
+    --status-positive: #aa806b;
+
+    --idle: #b59b5b;
+    --dnd: #8f5a4a;
+    --streaming: #6f4b5e;
+    --offline: var(--text-4);
+
+    /* BORDERS */
+    --border-light: rgba(219, 186, 158, 0.08);
+    --border: rgba(219, 186, 158, 0.16);
+    --border-hover: rgba(219, 186, 158, 0.24);
+    --button-border: rgba(255, 255, 255, 0.08);
+
+    /* BROWN SCALE (Unified Oak Palette) */
+    --brown-1: #dbba9e;
+    --brown-2: #c9a889;
+    --brown-3: #5d3e39;
+    --brown-4: #4a3430;
+    --brown-5: #3c2c29;
+
+    /* MAP BLUES → BROWNS (Midnight compatibility) */
+    --blue-1: var(--brown-1);
+    --blue-2: var(--brown-2);
+    --blue-3: var(--brown-3);
+    --blue-4: var(--brown-4);
+    --blue-5: var(--brown-5);
+
+    /* YELLOW (Old Paper / Gold) */
+    --yellow-1: #e6d3a3;
+    --yellow-2: #d6bf8a;
+    --yellow-3: #c6ab72;
+    --yellow-4: #b6975a;
+    --yellow-5: #9e7f45;
+
+    /* PURPLE (Wine / Ink) */
+    --purple-1: #7a5a6a;
+    --purple-2: #6a4a5a;
+    --purple-3: #5a3a4a;
+    --purple-4: #4a2a3a;
+    --purple-5: #3a1a2a;
+}
+
+/*
+ * This theme is a fork of the 'midnight' theme by refact0r please check out their original project, this would not have been possible without their work.
+ * https://github.com/refact0r/midnight-discord
+ * MIT License
+ */
