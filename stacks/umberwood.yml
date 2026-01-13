@@ -1,6 +1,5 @@
 services:
   umberwood-bot:
-    container_name: umberwood
     image: ghcr.io/rhomelab/red-discordbot:latest
     restart: unless-stopped
     volumes:
