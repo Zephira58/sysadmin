@@ -10,6 +10,13 @@ services:
       TOKEN: "${TOKEN}"
       PREFIX: "uw:"
       TEAM_MEMBERS_ARE_OWNERS: TRUE
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.role == manager
+          - node.role == worker
+
 volumes:
   umberwood-data:
     external: true
