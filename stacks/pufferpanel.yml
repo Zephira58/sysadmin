@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   pufferpanel:
-    image: pufferpanel/pufferpanel:latest
+    image: pufferpanel/pufferpanel:3.0.0-rc.16
     container_name: pufferpanel
     ports:
       - "8080:8080"   # Web UI
