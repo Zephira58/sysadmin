@@ -11,7 +11,7 @@ services:
       - FOUNDRY_USERNAME=${FOUNDRY_USERNAME}
       - FOUNDRY_ADMIN_KEY=${FOUNDRY_ADMIN_KEY}
     ports:
-      - "30000:30000"
+      - "30058:30000"
 
 volumes:
   foundry-data:
