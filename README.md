@@ -7,22 +7,6 @@ The goal is to keep all sysadmin-related work **versioned, documented, and repro
 
 ---
 
-## 📦 Service Stack
-
-### Productivity & Media
-- **📚 Calibre** → Web-based book management
-- **🎲 FoundryVTT** → Virtual tabletop for D&D campaigns
-
-### Monitoring & Infra
-- **🖥️ Beszel** → Hardware/infrastructure monitoring
-- **📡 Uptime Kuma** → Uptime and status monitoring
-
-### Projects & Experiments
-- **🐦 UmberWood** → Discord bot + databases
-- **🏦 OwlBank** → Mock banking service for the *Go Skate* game
-
----
-
 ## 📂 Repository Structure
 ```
 ├─ services/ # Service definitions (Dockerfiles, configs, templates)
